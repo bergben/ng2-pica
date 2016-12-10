@@ -7,7 +7,10 @@ import { Ng2PicaService } from './ng2-pica.service';
 export class Ng2PicaModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: Ng2PicaModule
+      ngModule: Ng2PicaModule,
+      providers: [
+        {provide: Ng2PicaService, useClass: Ng2PicaService}
+      ]
     };
 
   }
