@@ -1,6 +1,6 @@
 {
   "name": "ng2-pica",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Angular 2 wrapper for pica to resize images.",
   "repository": {
     "type": "git",
@@ -8,7 +8,7 @@
   },
   "license": "MIT",
   "main": "./build/ng2-pica.js",
-  "typings": "typings.d.ts",
+  "typings": "./build/ng2-pica.d.ts",
   "scripts": {
     "lint": "tslint src/**/*.ts && tslint *.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -25,7 +25,7 @@
     "resize"
   ],
   "dependencies": {
-    "angular2-file-drop": "bergben/pica"
+    "pica": "bergben/pica#4f16793d54012a2c796781e850d833a521b6ad84"
   },
   "peerDependencies": {
     "@angular/core": "^2.0.0",
