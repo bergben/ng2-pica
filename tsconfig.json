@@ -16,9 +16,5 @@
   "exclude": [
     "node_modules",
     "**/*.spec.ts"
-  ],
-  "files":[
-      "./typings.d.ts",
-      "./build/ng2-pica.d.ts"
   ]
 }
