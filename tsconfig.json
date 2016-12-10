@@ -18,6 +18,7 @@
     "**/*.spec.ts"
   ],
   "files":[
-      "./typings.d.ts"
+      "./typings.d.ts",
+      "./build/ng2-pica.d.ts"
   ]
 }
