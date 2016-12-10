@@ -13,7 +13,7 @@ $ npm install ng2-pica --save
 // app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Ng2PicaModule } from 'ng2-ck-editable'; // <-- import the module
+import { Ng2PicaModule } from 'ng2-pica'; // <-- import the module
 import { MyComponent } from './my.component';
 
 @NgModule({
