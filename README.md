@@ -1,3 +1,5 @@
+[![Join the chat at https://gitter.im/bergben/bergben](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bergben/bergben?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 # ng2-pica
 Angular 2 wrapper for <a href="https://github.com/nodeca/pica">pica</a> to resize images. 
 
