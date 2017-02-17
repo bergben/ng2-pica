@@ -1,20 +1,26 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "baseUrl": ".",
+    "module": "es2015",
     "target": "es5",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": false,
+    "sourceMap": true,
     "outDir": "build",
     "moduleResolution": "node",
-    "declaration": true
+    "declaration": true,
+    "stripInternal": true,
+    "skipLibCheck": true,
+    "paths": {
+      "@angular/core": ["node_modules/@angular/core"],
+      "rxjs": ["node_modules/rxjs"],
+      "pica": ["node_modules/pica"]
+    }
   },
-  "include": [
-    "./ng2-pica.ts",
-    "src/**/*"
+  "files": [
+    "ng2-pica.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
-  ]
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true
+  }
 }
