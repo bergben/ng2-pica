@@ -21,6 +21,7 @@
     "ng2-pica.ts"
   ],
   "angularCompilerOptions": {
-    "strictMetadataEmit": true
+    "strictMetadataEmit": true,
+    "genDir": "compiled"
   }
 }
