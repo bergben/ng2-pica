@@ -92,7 +92,7 @@ export class Ng2PicaService {
                         resizedCanvas.toBlob((blob) => {
                             let newFile = new File([blob], file.name, { type: file.type, lastModified: new Date().getTime() });
                             resolve(newFile);
-                        });
+                        }, useAlpha ? "image/png" : "image/jpeg");
                         window.URL.revokeObjectURL(img.src);
                     })
                     .catch((error) => {
