@@ -28,7 +28,7 @@ export class Ng2PicaService {
     public resize(files: File[], width: number, height: number): Observable<any> {
         let resizedFile: Subject<File> = new Subject<File>();
         files.forEach((file) => {
-            this._resizeFile(file, width, height).then((returnedFile) => {
+            this.resizeFile(file, width, height).then((returnedFile) => {
                 resizedFile.next(returnedFile);
             }).catch((error) => {
                 resizedFile.next(error);
@@ -66,8 +66,8 @@ export class Ng2PicaService {
         });
         return result;
     }
-    
-    private _resizeFile(file: File, width: number, height: number): Promise<File> {
+
+    private resizeFile(file: File, width: number, height: number): Promise<File> {
         let result: Promise<File> = new Promise((resolve, reject) => {
             let fromCanvas: HTMLCanvasElement = document.createElement('canvas');
             let ctx = fromCanvas.getContext('2d');
@@ -76,18 +76,26 @@ export class Ng2PicaService {
                 fromCanvas.width = img.naturalWidth;
                 fromCanvas.height = img.naturalHeight;
                 ctx.drawImage(img, 0, 0);
+                let imageData = ctx.getImageData(0, 0, img.naturalWidth, img.naturalHeight);
+                let useAlpha = true;
+                if (file.type === "image/jpeg" || (file.type === "image/png" && !this.isImgUsingAlpha(imageData))) {
+                    //image without alpha
+                    useAlpha = false;
+                    ctx = fromCanvas.getContext('2d', { 'alpha': false });
+                    ctx.drawImage(img, 0, 0);
+                }
                 let toCanvas: HTMLCanvasElement = document.createElement('canvas');
                 toCanvas.width = width;
                 toCanvas.height = height;
-                this.resizeCanvas(fromCanvas, toCanvas, {})
-                    .then((resizedCanvas:HTMLCanvasElement) => {
-                        resizedCanvas.toBlob((blob)=>{
+                this.resizeCanvas(fromCanvas, toCanvas, { 'alpha': useAlpha })
+                    .then((resizedCanvas: HTMLCanvasElement) => {
+                        resizedCanvas.toBlob((blob) => {
                             let newFile = new File([blob], file.name, { type: file.type, lastModified: new Date().getTime() });
                             resolve(newFile);
                         });
                         window.URL.revokeObjectURL(img.src);
                     })
-                    .catch((error)=>{
+                    .catch((error) => {
                         reject(error);
                         window.URL.revokeObjectURL(img.src);
                     });
@@ -95,5 +103,13 @@ export class Ng2PicaService {
             img.src = window.URL.createObjectURL(file);
         });
         return result;
+    }
+    private isImgUsingAlpha(imageData): boolean {
+        for (var i = 0; i < imageData.data.length; i += 4) {
+            if (imageData.data[i + 3] !== 255) {
+                return true;
+            }
+        }
+        return false;
     }
 }
