@@ -1,6 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, forwardRef } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import * as pica from 'pica';
+
+import { ImgExifService } from './img-exif.service';
 
 export interface resizeCanvasOptions {
     quality?: number;
@@ -25,13 +27,15 @@ export interface resizeBufferOptions {
 
 @Injectable()
 export class Ng2PicaService {
+    constructor(@Inject(forwardRef(() => ImgExifService)) private imageExifService:ImgExifService){
+    }
     public resize(files: File[], width: number, height: number): Observable<any> {
         let resizedFile: Subject<File> = new Subject<File>();
         files.forEach((file) => {
             this.resizeFile(file, width, height).then((returnedFile) => {
                 resizedFile.next(returnedFile);
             }).catch((error) => {
-                resizedFile.next(error);
+                resizedFile.error(error);
             });
         });
         return resizedFile.asObservable();
@@ -73,32 +77,33 @@ export class Ng2PicaService {
             let ctx = fromCanvas.getContext('2d');
             let img = new Image();
             img.onload = () => {
-                fromCanvas.width = img.naturalWidth;
-                fromCanvas.height = img.naturalHeight;
-                ctx.drawImage(img, 0, 0);
-                let imageData = ctx.getImageData(0, 0, img.naturalWidth, img.naturalHeight);
-                let useAlpha = true;
-                if (file.type === "image/jpeg" || (file.type === "image/png" && !this.isImgUsingAlpha(imageData))) {
-                    //image without alpha
-                    useAlpha = false;
-                    ctx = fromCanvas.getContext('2d', { 'alpha': false });
-                    ctx.drawImage(img, 0, 0);
-                }
-                let toCanvas: HTMLCanvasElement = document.createElement('canvas');
-                toCanvas.width = width;
-                toCanvas.height = height;
-                this.resizeCanvas(fromCanvas, toCanvas, { 'alpha': useAlpha })
-                    .then((resizedCanvas: HTMLCanvasElement) => {
-                        resizedCanvas.toBlob((blob) => {
-                            let newFile = new File([blob], file.name, { type: file.type, lastModified: new Date().getTime() });
-                            resolve(newFile);
-                        }, useAlpha ? "image/png" : "image/jpeg");
-                        window.URL.revokeObjectURL(img.src);
-                    })
-                    .catch((error) => {
-                        reject(error);
-                        window.URL.revokeObjectURL(img.src);
-                    });
+                this.imageExifService.getOrientedImage(img).then(orientedImg=>{
+                    window.URL.revokeObjectURL(img.src);
+                    fromCanvas.width = orientedImg.width;
+                    fromCanvas.height = orientedImg.height;
+                    ctx.drawImage(orientedImg, 0, 0);
+                    let imageData = ctx.getImageData(0, 0, orientedImg.width, orientedImg.height);
+                    let useAlpha = true;
+                    if (file.type === "image/jpeg" || (file.type === "image/png" && !this.isImgUsingAlpha(imageData))) {
+                        //image without alpha
+                        useAlpha = false;
+                        ctx = fromCanvas.getContext('2d', { 'alpha': false });
+                        ctx.drawImage(orientedImg, 0, 0);
+                    }
+                    let toCanvas: HTMLCanvasElement = document.createElement('canvas');
+                    toCanvas.width = width;
+                    toCanvas.height = height;
+                    this.resizeCanvas(fromCanvas, toCanvas, { 'alpha': useAlpha })
+                        .then((resizedCanvas: HTMLCanvasElement) => {
+                            resizedCanvas.toBlob((blob) => {
+                                let newFile = new File([blob], file.name, { type: file.type, lastModified: new Date().getTime() });
+                                resolve(newFile);
+                            }, useAlpha ? "image/png" : "image/jpeg");
+                        })
+                        .catch((error) => {
+                            reject(error);
+                        });
+                });
             }
             img.src = window.URL.createObjectURL(file);
         });

@@ -35,14 +35,11 @@ import { Ng2PicaService } from 'ng2-pica';
 export class ImgMaxPXSizeService {
     constructor(private ng2PicaService: Ng2PicaService) {
       this.ng2PicaService.resize([someFile], newWidth, newHeight).subscribe((result)=>{
-             if (typeof result.name !== 'undefined' && typeof result.size !== 'undefined' && typeof result.type !== 'undefined') {
-                 //all good, result is a file
-                  console.info(result);
-             }
-             else {
-                 //something went wrong 
-                  console.error(result);
-             }
+            //all good, result is a file
+            console.info(result);
+      }, error =>{
+            //something went wrong 
+            console.error(error);
       });
     }
 }
@@ -51,28 +48,8 @@ export class ImgMaxPXSizeService {
 ## Methods
 
 ### `.resize(files: File[], width: number, height: number): Observable<any>`
-This method should fit most use cases. Expects an array of files, a width and height to which the images should be resized. Returns a file, if something goes wrong, returns an error object instead (forwarded directly from pica).
+This method should fit most use cases. Expects an array of files, a width and height to which the images should be resized. Returns a file, if something goes wrong, returns an error object instead forwarded directly from pica.
 The Observable receives a next on every file that has been resized.
-
-```TypeScript
-import { Ng2PicaService } from 'ng2-pica';
-
-@Injectable()
-export class ImgMaxPXSizeService {
-    constructor(private ng2PicaService: Ng2PicaService) {
-      this.ng2PicaService.resize([someFile, anotherFile, andYetAnotherFile], newWidth, newHeight).subscribe((result)=>{
-             if (typeof result.name !== 'undefined' && typeof result.size !== 'undefined' && typeof result.type !== 'undefined') {
-                 //all good, result is a file
-                  console.info("file has been resized", result);
-             }
-             else {
-                 //something went wrong 
-                  console.error(result);
-             }
-      });
-    }
-}
-```
 
 ### `resizeCanvas(from: HTMLCanvasElement, to: HTMLCanvasElement, options: resizeCanvasOptions): Promise<HTMLCanvasElement>`
 ### `resizeBuffer(options: resizeBufferOptions): Promise<Uint8Array>`
