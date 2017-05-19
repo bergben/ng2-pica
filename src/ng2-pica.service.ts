@@ -1,6 +1,6 @@
 import { Injectable, Inject, forwardRef } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
-import * as pica from 'pica';
+import * as pica from 'bergben-pica';
 
 import { ImgExifService } from './img-exif.service';
 
