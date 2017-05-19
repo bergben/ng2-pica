@@ -28,7 +28,7 @@
         "resize"
     ],
     "dependencies": {
-        "bergben-pica": "^2.0.25"
+        "bergben-pica": "^2.0.26"
     },
     "peerDependencies": {
         "@angular/core": "^2.0.0",
