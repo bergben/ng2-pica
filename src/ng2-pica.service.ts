@@ -2,6 +2,8 @@ import { Injectable, Inject, forwardRef } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import * as pica from 'bergben-pica';
 
+declare var window;
+
 import { ImgExifService } from './img-exif.service';
 
 export interface resizeCanvasOptions {
@@ -42,7 +44,11 @@ export class Ng2PicaService {
     }
     public resizeCanvas(from: HTMLCanvasElement, to: HTMLCanvasElement, options: resizeCanvasOptions): Promise<HTMLCanvasElement> {
         let result: Promise<HTMLCanvasElement> = new Promise((resolve, reject) => {
-            pica.resizeCanvas(from, to, options, (error) => {
+            let curPica=pica;
+            if(!curPica || !curPica.resizeCanvas){
+                curPica=window.pica;
+            }
+            curPica.resizeCanvas(from, to, options, (error) => {
                 //resize complete
                 if (error) {
                     reject(error);
@@ -57,7 +63,11 @@ export class Ng2PicaService {
     }
     public resizeBuffer(options: resizeBufferOptions): Promise<Uint8Array> {
         let result: Promise<Uint8Array> = new Promise((resolve, reject) => {
-            pica.resizeBuffer(options, (error, output) => {
+            let curPica=pica;
+            if(!curPica || !curPica.resizeCanvas){
+                curPica=window.pica;
+            }
+            curPica.resizeBuffer(options, (error, output) => {
                 //resize complete
                 if (error) {
                     reject(error);
