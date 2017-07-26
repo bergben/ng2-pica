@@ -108,7 +108,7 @@ export class Ng2PicaService {
                             resizedCanvas.toBlob((blob) => {
                                 let newFile:File = this.generateResultFile(blob, file.name, file.type, new Date().getTime());
                                 resolve(newFile);
-                            }, useAlpha ? "image/png" : "image/jpeg");
+                            }, file.type);
                         })
                         .catch((error) => {
                             reject(error);
