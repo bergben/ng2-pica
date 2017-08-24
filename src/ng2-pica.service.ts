@@ -32,10 +32,10 @@ export interface resizeBufferOptions {
 export class Ng2PicaService {
     constructor(@Inject(forwardRef(() => ImgExifService)) private imageExifService:ImgExifService){
     }
-    public resize(files: File[], width: number, height: number): Observable<any> {
+    public resize(files: File[], width: number, height: number, keepAspectRatio: boolean = false): Observable<any> {
         let resizedFile: Subject<File> = new Subject<File>();
         files.forEach((file) => {
-            this.resizeFile(file, width, height).then((returnedFile) => {
+            this.resizeFile(file, width, height, keepAspectRatio).then((returnedFile) => {
                 resizedFile.next(returnedFile);
             }).catch((error) => {
                 resizedFile.error(error);
@@ -76,7 +76,7 @@ export class Ng2PicaService {
         return result;
     }
 
-    private resizeFile(file: File, width: number, height: number): Promise<File> {
+    private resizeFile(file: File, width: number, height: number, keepAspectRatio: boolean = false): Promise<File> {
         let result: Promise<File> = new Promise((resolve, reject) => {
             let fromCanvas: HTMLCanvasElement = document.createElement('canvas');
             let ctx = fromCanvas.getContext('2d');
@@ -88,6 +88,11 @@ export class Ng2PicaService {
                     fromCanvas.height = orientedImg.height;
                     ctx.drawImage(orientedImg, 0, 0);
                     let imageData = ctx.getImageData(0, 0, orientedImg.width, orientedImg.height);
+                    if (keepAspectRatio) {
+                        let ratio = Math.min(width / imageData.width, height / imageData.height);
+                        width = Math.round(imageData.width * ratio);
+                        height = Math.round(imageData.height * ratio);
+                    }
                     let useAlpha = true;
                     if (file.type === "image/jpeg" || (file.type === "image/png" && !this.isImgUsingAlpha(imageData))) {
                         //image without alpha
