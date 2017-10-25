@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Ng2PicaService } from './ng2-pica.service';
 import { ImgExifService } from './img-exif.service';
 

@@ -1,6 +1,6 @@
 {
     "name": "ng2-pica",
-    "version": "1.0.8",
+    "version": "1.1.0",
     "description": "Angular 2 wrapper for pica to resize images.",
     "repository": {
         "type": "git",
@@ -28,24 +28,24 @@
         "resize"
     ],
     "dependencies": {
-        "bergben-pica": "^2.0.26"
+        "pica": ">=4.0.1"
     },
     "peerDependencies": {
-        "@angular/core": ">2.0.0",
-        "@angular/common": ">2.0.0",
-        "@angular/platform-browser": ">2.0.0",
-        "rxjs": ">5.0.0-beta.12"
+        "@angular/core": ">=2.0.0",
+        "@angular/common": ">=2.0.0",
+        "@angular/platform-browser": ">=2.0.0",
+        "rxjs": ">=5.0.0-beta.12"
     },
     "devDependencies": {
-        "@angular/common": "2.4.8",
-        "@angular/compiler": "^2.0.0",
-        "@angular/compiler-cli": "^2.4.8",
-        "@angular/core": "2.4.8",
-        "@angular/platform-browser": "2.4.8",
-        "@angular/platform-browser-dynamic": "2.4.8",
-        "@angular/router": "3.4.8",
-        "@types/node": "^7.0.5",
-        "core-js": "^2.4.1",
+        "@angular/common": ">=2.4.8",
+        "@angular/compiler": ">=2.0.0",
+        "@angular/compiler-cli": ">=2.4.8",
+        "@angular/core": ">=2.4.8",
+        "@angular/platform-browser": ">=2.4.8",
+        "@angular/platform-browser-dynamic": ">=2.4.8",
+        "@angular/router": ">=3.4.8",
+        "@types/node": ">=7.0.5",
+        "core-js": ">=2.4.1",
         "reflect-metadata": "^0.1.3",
         "rollup": "^0.41.4",
         "rxjs": "5.1.1",

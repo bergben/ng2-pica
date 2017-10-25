@@ -3,8 +3,6 @@
 # ng2-pica
 Angular 2 and beyond wrapper for <a href="https://github.com/nodeca/pica">pica</a> to resize images. 
 
-Uses a fork from <a href="https://github.com/nodeca/pica">pica</a> (<a href="https://github.com/bergben/pica">bergben/pica</a>) which has WebGL and node.js support removed to be compatible with TS and Angular 2.
-
 ## Install
 ```bash
 $ npm install ng2-pica --save
@@ -54,6 +52,3 @@ The Observable receives a next on every file that has been resized.
 ### `resizeCanvas(from: HTMLCanvasElement, to: HTMLCanvasElement, options: resizeCanvasOptions): Promise<HTMLCanvasElement>`
 ### `resizeBuffer(options: resizeBufferOptions): Promise<Uint8Array>`
 Please check out the <a href="https://github.com/nodeca/pica">pica</a> readme for more information on those methods.
-
-## To-do
- - Provide a demo

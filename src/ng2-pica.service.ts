@@ -1,6 +1,7 @@
 import { Injectable, Inject, forwardRef } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
-import * as pica from 'bergben-pica';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import pica from 'pica/dist/pica';
 
 declare var window;
 
@@ -44,39 +45,33 @@ export class Ng2PicaService {
     }
     public resizeCanvas(from: HTMLCanvasElement, to: HTMLCanvasElement, options: resizeCanvasOptions): Promise<HTMLCanvasElement> {
         let result: Promise<HTMLCanvasElement> = new Promise((resolve, reject) => {
-            let curPica=pica;
-            if(!curPica || !curPica.resizeCanvas){
-                curPica=window.pica;
+            let curPica= new pica();
+            if(!curPica || !curPica.resize){
+                curPica=new window.pica();
             }
-            curPica.resizeCanvas(from, to, options, (error) => {
-                //resize complete
-                if (error) {
+            curPica.resize(from, to, options)
+                .then(response => {
+                    resolve(response);
+                },
+                error => {
                     reject(error);
-                }
-                else {
-                    //success
-                    resolve(to);
-                }
-            });
+                });
         });
         return result;
     }
     public resizeBuffer(options: resizeBufferOptions): Promise<Uint8Array> {
         let result: Promise<Uint8Array> = new Promise((resolve, reject) => {
-            let curPica=pica;
-            if(!curPica || !curPica.resizeCanvas){
-                curPica=window.pica;
+            let curPica=new pica();
+            if(!curPica || !curPica.resizeBuffer){
+                curPica=new window.pica();
             }
-            curPica.resizeBuffer(options, (error, output) => {
-                //resize complete
-                if (error) {
+            curPica.resizeBuffer(options)
+                .then(response => {
+                    resolve(response);
+                },
+                error => {
                     reject(error);
-                }
-                else {
-                    //success
-                    resolve(output);
-                }
-            });
+                });
         });
         return result;
     }

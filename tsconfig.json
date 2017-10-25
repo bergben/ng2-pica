@@ -1,29 +1,29 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "module": "es2015",
-    "target": "es5",
-    "experimentalDecorators": true,
-    "sourceMap": true,
-    "outDir": "dist",
-    "moduleResolution": "node",
-    "declaration": true,
-    "stripInternal": true,
-    "skipLibCheck": true,
-    "paths": {
-      "@angular/core": ["node_modules/@angular/core"],
-      "rxjs": ["node_modules/rxjs"],
-      "pica": ["node_modules/pica"]
+    "compilerOptions": {
+        "baseUrl": ".",
+        "module": "es2015",
+        "target": "es5",
+        "experimentalDecorators": true,
+        "sourceMap": true,
+        "outDir": "dist",
+        "moduleResolution": "node",
+        "declaration": true,
+        "stripInternal": true,
+        "skipLibCheck": true,
+        "paths": {
+            "@angular/core": ["node_modules/@angular/core"],
+            "rxjs": ["node_modules/rxjs"],
+            "pica": ["node_modules/pica"]
+        },
+        "lib": [
+            "es2015",
+            "dom"
+        ]
     },
-    "lib": [
-      "es2015", 
-      "dom"
-    ]
-  },
-  "files": [
-    "ng2-pica.ts"
-  ],
-  "angularCompilerOptions": {
-    "strictMetadataEmit": true
-  }
+    "files": [
+        "ng2-pica.ts"
+    ],
+    "angularCompilerOptions": {
+        "strictMetadataEmit": true
+    }
 }
