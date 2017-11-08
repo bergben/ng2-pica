@@ -7,7 +7,7 @@ declare var window;
 
 import { ImgExifService } from './img-exif.service';
 
-export interface resizeCanvasOptions {
+export interface ResizeCanvasOptions {
     quality?: number;
     alpha?: boolean;
     unsharpAmount?: number;
@@ -15,7 +15,7 @@ export interface resizeCanvasOptions {
     unsharpThreshold?: number;
 }
 
-export interface resizeBufferOptions {
+export interface ResizeBufferOptions {
     src: Uint8Array;
     width: number;
     height: number;
@@ -43,7 +43,7 @@ export class Ng2PicaService {
         });
         return resizedFile.asObservable();
     }
-    public resizeCanvas(from: HTMLCanvasElement, to: HTMLCanvasElement, options: resizeCanvasOptions): Promise<HTMLCanvasElement> {
+    public resizeCanvas(from: HTMLCanvasElement, to: HTMLCanvasElement, options: ResizeCanvasOptions): Promise<HTMLCanvasElement> {
         let result: Promise<HTMLCanvasElement> = new Promise((resolve, reject) => {
             let curPica= new pica();
             if(!curPica || !curPica.resize){
@@ -59,7 +59,7 @@ export class Ng2PicaService {
         });
         return result;
     }
-    public resizeBuffer(options: resizeBufferOptions): Promise<Uint8Array> {
+    public resizeBuffer(options: ResizeBufferOptions): Promise<Uint8Array> {
         let result: Promise<Uint8Array> = new Promise((resolve, reject) => {
             let curPica=new pica();
             if(!curPica || !curPica.resizeBuffer){
