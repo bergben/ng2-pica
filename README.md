@@ -1,7 +1,7 @@
 [![Join the chat at https://gitter.im/bergben/bergben](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bergben/bergben?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # ng2-pica
-Angular 2 and beyond wrapper for <a href="https://github.com/nodeca/pica">pica</a> to resize images. 
+Angular wrapper for <a href="https://github.com/nodeca/pica">pica</a> to resize images. 
 
 ## Install
 ```bash
@@ -45,9 +45,10 @@ export class ImgMaxPXSizeService {
 
 ## Methods
 
-### `.resize(files: File[], width: number, height: number): Observable<any>`
+### `.resize(files: File[], width: number, height: number, keepAspectRatio: boolean = false): Observable<any>`
 This method should fit most use cases. Expects an array of files, a width and height to which the images should be resized. Returns a file, if something goes wrong, returns an error object instead forwarded directly from pica.
 The Observable receives a next on every file that has been resized.
+You can also provide only the width and the height and the other value will be calculated keeping the aspect ratio if you set the 4. parameter to true. See https://github.com/bergben/ng2-pica/issues/4 and https://github.com/bergben/ng2-pica/pull/7 for more.
 
 ### `resizeCanvas(from: HTMLCanvasElement, to: HTMLCanvasElement, options: resizeCanvasOptions): Promise<HTMLCanvasElement>`
 ### `resizeBuffer(options: resizeBufferOptions): Promise<Uint8Array>`
