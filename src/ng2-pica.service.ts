@@ -34,7 +34,7 @@ export class Ng2PicaService {
     }
     public resize(files: File[], width: number, height: number, keepAspectRatio: boolean = false): Observable<any> {
         let resizedFile: Subject<File> = new Subject<File>();
-        for(let i = 0; iLen = files.length; i < iLen; i++){
+        for(let i = 0; i < files.length; i++){
             this.resizeFile(files[i], width, height, keepAspectRatio).then((returnedFile) => {
                 resizedFile.next(returnedFile);
             }).catch((error) => {
