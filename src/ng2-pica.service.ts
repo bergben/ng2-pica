@@ -34,13 +34,13 @@ export class Ng2PicaService {
     }
     public resize(files: File[], width: number, height: number, keepAspectRatio: boolean = false): Observable<any> {
         let resizedFile: Subject<File> = new Subject<File>();
-        files.forEach((file) => {
-            this.resizeFile(file, width, height, keepAspectRatio).then((returnedFile) => {
+        for(let i = 0; iLen = files.length; i < iLen; i++){
+            this.resizeFile(files[i], width, height, keepAspectRatio).then((returnedFile) => {
                 resizedFile.next(returnedFile);
             }).catch((error) => {
                 resizedFile.error(error);
             });
-        });
+        }
         return resizedFile.asObservable();
     }
     public resizeCanvas(from: HTMLCanvasElement, to: HTMLCanvasElement, options: ResizeCanvasOptions): Promise<HTMLCanvasElement> {
