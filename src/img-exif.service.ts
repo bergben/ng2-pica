@@ -8,6 +8,14 @@ export class ImgExifService {
         let result: Promise<HTMLImageElement> = new Promise((resolve, reject) => {
             let img:any;
 
+            if(!EXIF){
+                EXIF = {};
+                EXIF.getData = function(img, callback){
+                    callback.call(image);
+                    return true;
+                }
+                EXIF.getTag = () => false;
+            }
             EXIF.getData(image, () => {
                 let orientation = EXIF.getTag(image, "Orientation");
 

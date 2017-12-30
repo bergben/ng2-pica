@@ -13,7 +13,8 @@
         "paths": {
             "@angular/core": ["node_modules/@angular/core"],
             "rxjs": ["node_modules/rxjs"],
-            "pica": ["node_modules/pica"]
+            "pica": ["node_modules/pica"],
+            "exif-js": ["node_modules/exif-js"],
         },
         "lib": [
             "es2015",
