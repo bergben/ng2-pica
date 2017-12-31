@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import 'exif-js';
+import 'exif-js/exif';
 declare var EXIF: any;
 
 @Injectable()
