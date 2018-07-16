@@ -22,7 +22,7 @@
         ]
     },
     "files": [
-        "inedx.d.ts"
+        "index.d.ts"
     ],
     "angularCompilerOptions": {
         "strictMetadataEmit": true
