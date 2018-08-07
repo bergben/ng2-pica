@@ -22,7 +22,7 @@
         ]
     },
     "files": [
-        "index.d.ts"
+        "index.ts"
     ],
     "angularCompilerOptions": {
         "strictMetadataEmit": true
