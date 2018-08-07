@@ -22,7 +22,7 @@
         ]
     },
     "files": [
-        "ng2-pica.ts"
+        "index.d.ts"
     ],
     "angularCompilerOptions": {
         "strictMetadataEmit": true
