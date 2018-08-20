@@ -1,5 +1,5 @@
 export default {
-    entry: 'dist/index.js',
+    entry: 'dist/ng2-pica.js',
     dest: 'dist/bundles/ng2-pica.umd.js',
     sourceMap: false,
     format: 'umd',
