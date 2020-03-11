@@ -28,7 +28,7 @@
         "resize"
     ],
     "dependencies": {
-        "exif-js": "^2.3.0",
+        "exifr": "^4.3.0",
         "pica": ">=4.0.1"
     },
     "peerDependencies": {
