@@ -28,7 +28,7 @@
         "resize"
     ],
     "dependencies": {
-        "exifr": "^4.3.0",
+        "exifr": "^4.3.4",
         "pica": ">=4.0.1"
     },
     "peerDependencies": {
